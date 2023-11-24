@@ -91,7 +91,16 @@ public class DefaultDriveCommand extends LoggingCommandBase {
     private void setMotorSpeedsArcade(double speed, double turn, boolean boost) {
 
         // FIXME: what should we put here?
-        driveSubsystem.setMotorSpeeds(0, 0);
+        if (speed < 0) {
+            turn = -turn;
+        }
+        if (!boost) {
+            speed /= 2;
+        }
+        else if (boost) {
+            speed = Math.signum(speed);
+        }
+        driveSubsystem.setMotorSpeeds(speed + turn, speed - turn);
     }
 
 
