@@ -51,10 +51,12 @@ public class DefaultDriveCommand extends LoggingCommandBase {
 
         case DUAL_STICK_ARCADE:
             setMotorSpeedsArcade(driverController.getLeftY(), driverController.getRightX(), boost);
+            // System.out.println("Set dual arcade mode");
             break;
 
         case SINGLE_STICK_ARCADE:
             setMotorSpeedsArcade(driverController.getLeftY(), driverController.getLeftX(), boost);
+            // System.out.println("Set dual arcade mode");
             break;
 
         case TANK:
@@ -97,10 +99,12 @@ public class DefaultDriveCommand extends LoggingCommandBase {
         if (!boost) {
             speed /= 2;
         }
-        else if (boost) {
-            speed = Math.signum(speed);
+        else {
+            speed  = Math.signum(speed) * 0.75;
+            turn  /= 4;
         }
         driveSubsystem.setMotorSpeeds(speed + turn, speed - turn);
+        // System.out.println("Set arcade speed");
     }
 
 
